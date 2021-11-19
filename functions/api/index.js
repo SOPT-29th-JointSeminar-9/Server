@@ -24,23 +24,6 @@ app.use(cookieParser());
 
 app.use('/', require('./routes'));
 
-io.on('connection', (socket) => {
-  console.log(`Socket connected ${socket.id}`);
-  socket.on('roomjoin', (userid) => {
-    console.log(userid);
-    // socket.join(userid);
-  });
-  socket.on('message', (obj) => {
-    // 클라이언트에서 message라는 이름의 이벤트를 받았을 경우 호출
-    console.log('server received data');
-    console.log(obj);
-  });
-  socket.on('disconnect', () => {
-    // 클라이언트의 연결이 끊어졌을 때 호출
-    console.log(`Socket disconnected : ${socket.id}`);
-  });
-});
-
 app.use('*', (req, res) => {
   res.status(404).json({
     status: 404,
