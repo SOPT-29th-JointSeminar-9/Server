@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const hpp = require('hpp');
 const helmet = require('helmet');
-const io = require('socket.io');
 
 dotenv.config();
 
