@@ -3,6 +3,6 @@ const router = express.Router();
 
 //router.get('/', require('./radioGET'));
 router.get('/popular', require('./radioPopularGET'));
-router.post('/', require('./radioCREATE'));
+router.post('/', require('./radioPOST'));
 
 module.exports = router;

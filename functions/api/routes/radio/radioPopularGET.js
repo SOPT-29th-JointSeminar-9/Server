@@ -19,12 +19,9 @@ module.exports = async (req, res) => {
     client = await db.connect(req);
 
     // 빌려온 connection을 사용해 우리가 db/[파일].js에서 미리 정의한 SQL 쿼리문을 날려줍니다.
-
     const hugs = await hugDB.getAllHugsPopular(client);
-    console.log(hugs);
-    console.log("NOW");
     
-    // 성공적으로 users를 가져왔다면, response를 보내줍니다.
+    // 성공적으로 데이터를 가져왔다면, response를 보내줍니다.
     res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.GET_MUSICHUG_POPULAR_SUCCESS, hugs));
     
     // try문 안에서 에러가 발생했을 시 catch문으로 error객체가 넘어옵니다.
