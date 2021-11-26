@@ -9,18 +9,14 @@ const db = require('../../../db/db');
 const { hugDB } = require('../../../db');
 
 module.exports = async (req, res) => {
-  const { hugTitle, nickname } = req.body;
-
-  if (!hugTitle || !nickname) return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, responseMessage.ADD_MUSICHUG_FAIL));
-
   let client;
 
   try {
     client = await db.connect(req);
 
-    const newHug = await hugDB.createHug(client, hugTitle, nickname);
+    const hugs = await hugDB.getAllHugsPopular(client);
 
-    res.status(statusCode.OK).send(util.success(statusCode.CREATED, responseMessage.ADD_MUSICHUG_SUCCESS, newHug));
+    res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.GET_MUSICHUG_POPULAR_SUCCESS, hugs));
   } catch (error) {
     functions.logger.error(`[ERROR] [${req.method.toUpperCase()}] ${req.originalUrl}`, `[CONTENT] ${error}`);
     console.log(error);
